@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Header } from './components/Header'
+import { AiSidebar } from './components/AiSidebar'
 import './App.css'
 
 interface Message {
@@ -15,30 +17,24 @@ export default function App() {
   const [messages, setMessages] = useState<Message[]>([
     { id: '1', sender: 'ai', text: 'Hi! Im Verity. Your friend is an assistant! Ask anything, I know everything!', timestamp: '12:00' }
   ])
-  const [inputMessage, setInputMessage] = useState('')
   const [isThinking, setIsThinking] = useState(false)
 
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!inputMessage.trim()) return
-
+  const handleSendMessage = (text: string) => {
     const userMsg: Message = {
       id: Date.now().toString(),
       sender: 'user',
-      text: inputMessage,
+      text,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
 
     setMessages(prev => [...prev, userMsg])
-    const currentInput = inputMessage
-    setInputMessage('')
     setIsThinking(true)
 
     setTimeout(() => {
       let aiResponse = "I've noted that! Let me help you set up your store."
-      if (currentInput.toLowerCase().includes('export')) {
+      if (text.toLowerCase().includes('export')) {
         aiResponse = "Exporting store configuration... Done! Ready for deployment."
-      } else if (currentInput.toLowerCase().includes('свче') || currentInput.toLowerCase().includes('свеч')) {
+      } else if (text.toLowerCase().includes('свче') || text.toLowerCase().includes('свеч')) {
         aiResponse = "Свечи — отличный выбор! Я создал структуру каталога и подобрал тёплую палитру."
       }
 
@@ -52,24 +48,8 @@ export default function App() {
 
   return (
     <div className="layout-root">
-      {/* Main workspace */}
       <div className="workspace-column">
-        <header className="top-header">
-          <div className="brand" onClick={() => setActiveTab('home')}>
-            Knife.<br />inc
-          </div>
-          <nav className="nav-menu">
-            <button className={activeTab === 'create' ? 'active' : ''} onClick={() => setActiveTab('create')}>
-              Создать
-            </button>
-            <button className={activeTab === 'benefits' ? 'active' : ''} onClick={() => setActiveTab('benefits')}>
-              Плюсы
-            </button>
-            <button className={activeTab === 'guide' ? 'active' : ''} onClick={() => setActiveTab('guide')}>
-              Инструкция
-            </button>
-          </nav>
-        </header>
+        <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <main className="main-viewport">
           {activeTab === 'home' && (
@@ -150,41 +130,12 @@ export default function App() {
         </main>
       </div>
 
-      {/* AI Assistant Sidebar (Verity) */}
-      <aside className="ai-sidebar">
-        <div className="ai-sidebar-header">
-          <div className="ai-avatar-badge">✨</div>
-          <span className="ai-name">AI Pro 1488</span>
-        </div>
-
-        <div className="chat-messages">
-          {messages.map(msg => (
-            <div key={msg.id} className={`chat-bubble ${msg.sender}`}>
-              <p>{msg.text}</p>
-              <span className="timestamp">{msg.timestamp}</span>
-            </div>
-          ))}
-          {isThinking && (
-            <div className="chat-bubble ai thinking">
-              <p>Verity thinking... 6s</p>
-            </div>
-          )}
-        </div>
-
-        <form className="chat-input-form" onSubmit={handleSendMessage}>
-          <input
-            type="text"
-            placeholder="Спросите ИИ о чем угодно..."
-            value={inputMessage}
-            onChange={e => setInputMessage(e.target.value)}
-          />
-          <button type="submit" aria-label="Отправить">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-            </svg>
-          </button>
-        </form>
-      </aside>
+      <AiSidebar
+        messages={messages}
+        onSendMessage={handleSendMessage}
+        index-key={0}
+        isThinking={isThinking}
+      />
     </div>
   )
 }
