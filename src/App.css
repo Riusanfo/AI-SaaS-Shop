@@ -52,6 +52,7 @@ body {
   background: transparent;
   border-right: 1px solid var(--border-subtle);
   transition: margin-right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 0;
 }
 
 .workspaceColumn.withSidebar {
@@ -69,11 +70,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 90px 48px;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.workspaceInner {
+  padding: 60px 32px;
   width: 100%;
-  max-width: 840px;
+  animation: fadeIn 0.5s ease-out;
 }

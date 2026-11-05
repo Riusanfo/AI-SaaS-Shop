@@ -1,5 +1,9 @@
 .heroPane {
   text-align: center;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .heroBadge {
@@ -13,7 +17,7 @@
   font-size: 13px;
   font-weight: 600;
   border-radius: 30px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
 }
 
@@ -26,22 +30,22 @@
 }
 
 .heroHeadline {
-  font-size: 64px;
+  font-size: clamp(36px, 4.5vw, 56px);
   font-weight: 800;
   background: linear-gradient(135deg, #ffffff 20%, #a855f7 70%, #ec4899 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   letter-spacing: -0.04em;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 .heroSubline {
-  font-size: 20px;
+  font-size: 18px;
   color: #94a3b8;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   line-height: 1.6;
-  max-width: 680px;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -50,14 +54,14 @@
   display: flex;
   gap: 16px;
   justify-content: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 
 .btnPrimary {
   background: linear-gradient(135deg, #a855f7, #ec4899);
   color: #ffffff;
   border: none;
-  padding: 18px 36px;
+  padding: 16px 32px;
   font-size: 16px;
   font-weight: 600;
   border-radius: 12px;
@@ -76,7 +80,7 @@
   background: #0e0e12;
   color: #f8fafc;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 18px 32px;
+  padding: 16px 28px;
   font-size: 16px;
   font-weight: 500;
   border-radius: 12px;
@@ -96,6 +100,7 @@
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
   text-align: left;
+  width: 100%;
 }
 
 .previewHeader {
@@ -125,14 +130,14 @@
 }
 
 .previewBody {
-  padding: 30px;
+  padding: 24px;
   background: linear-gradient(180deg, #0e0e12 0%, #09090b 100%);
 }
 
 .previewMockStore {
   background: #18181b;
   border-radius: 10px;
-  padding: 24px;
+  padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -140,23 +145,23 @@
   font-weight: 700;
   font-size: 14px;
   color: #a855f7;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .mockHeroText {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .mockGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 .mockItem {
-  height: 80px;
+  height: 60px;
   background: #27272a;
   border-radius: 6px;
 }
