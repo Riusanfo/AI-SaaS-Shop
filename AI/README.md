@@ -3,7 +3,8 @@
 Структура документации и регламентов разработки проекта shop_saas_ai.
 
 ## Содержание
-- [Концепция и анализ конкурентов (`AI/docs/`)](AI/docs/concept.md)
+- [Концепция и анализ конкурентов (`AI/docs/concept.md`)](AI/docs/concept.md)
+- [Руководство React & TypeScript (`AI/docs/react-ts-guidelines.md`)](AI/docs/react-ts-guidelines.md)
 - [Правила проекта (`AI/rules/`)](AI/rules/project.md)
   - [Проект и стек](AI/rules/project.md#проект-и-стек)
   - [Правила Git и коммитов](AI/rules/git.md)

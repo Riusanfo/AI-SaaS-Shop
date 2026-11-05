@@ -1,0 +1,162 @@
+.heroPane {
+  text-align: center;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #e9d5ff;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 30px;
+  margin-bottom: 32px;
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+}
+
+.badgeDot {
+  width: 8px;
+  height: 8px;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #34d399;
+}
+
+.heroHeadline {
+  font-size: 64px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 20%, #a855f7 70%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 24px;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.heroSubline {
+  font-size: 20px;
+  color: #94a3b8;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroActions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  color: #ffffff;
+  border: none;
+  padding: 18px 36px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(168, 85, 247, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btnPrimary:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 36px rgba(168, 85, 247, 0.55);
+}
+
+.btnSecondary {
+  background: #0e0e12;
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 32px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnSecondary:hover {
+  background: #16161b;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.heroPreviewCard {
+  background: #0e0e12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  text-align: left;
+}
+
+.previewHeader {
+  background: #09090b;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.red { background: #ef4444; }
+.dot.yellow { background: #f59e0b; }
+.dot.green { background: #22c55e; }
+
+.previewTitle {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.previewBody {
+  padding: 30px;
+  background: linear-gradient(180deg, #0e0e12 0%, #09090b 100%);
+}
+
+.previewMockStore {
+  background: #18181b;
+  border-radius: 10px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mockNav {
+  font-weight: 700;
+  font-size: 14px;
+  color: #a855f7;
+  margin-bottom: 16px;
+}
+
+.mockHeroText {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.mockGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mockItem {
+  height: 80px;
+  background: #27272a;
+  border-radius: 6px;
+}
