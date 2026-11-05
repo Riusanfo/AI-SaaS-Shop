@@ -1,9 +1,11 @@
 interface HeaderProps {
   activeTab: string
   setActiveTab: (tab: 'home' | 'create' | 'benefits' | 'guide') => void
+  onToggleAi: () => void
+  isAiOpen: boolean
 }
 
-export function Header({ activeTab, setActiveTab }: HeaderProps) {
+export function Header({ activeTab, setActiveTab, onToggleAi, isAiOpen }: HeaderProps) {
   return (
     <header className="top-header">
       <div className="brand" onClick={() => setActiveTab('home')}>
@@ -20,6 +22,9 @@ export function Header({ activeTab, setActiveTab }: HeaderProps) {
           Инструкция
         </button>
       </nav>
+      <button className="ai-toggle-btn" onClick={onToggleAi} aria-label="Переключить ИИ-ассистента">
+        ✨ {isAiOpen ? 'Скрыть ИИ' : 'ИИ Веррити'}
+      </button>
     </header>
   )
 }

@@ -14,11 +14,23 @@
   --border-subtle: rgba(255, 255, 255, 0.1);
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   background-color: var(--bg-void);
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
+  animation: fadeIn 0.4s ease-out;
 }
 
 .layout-root {
@@ -33,6 +45,7 @@ body {
   flex-direction: column;
   background: var(--bg-void);
   border-right: 1px solid var(--border-subtle);
+  transition: width 0.3s ease;
 }
 
 .top-header {
@@ -71,12 +84,30 @@ body {
   }
 }
 
+.ai-toggle-btn {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #e9d5ff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+
+  &:hover {
+    background: rgba(168, 85, 247, 0.25);
+    transform: translateY(-1px);
+  }
+}
+
 .main-viewport {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px 40px;
+  animation: fadeIn 0.4s ease-out;
 }
 
 .workspace-inner {
@@ -283,7 +314,7 @@ body {
   }
 }
 
-/* AI Assistant Sidebar (Verity) */
+/* AI Assistant Sidebar (Verity) with slide animation */
 .ai-sidebar {
   width: 420px;
   background: #3b0764;
@@ -291,35 +322,64 @@ body {
   display: flex;
   flex-direction: column;
   padding: 28px;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s ease;
+  transform: translateX(0);
 
-  @media (max-width: 1024px) {
-    display: none;
+  &.closed {
+    transform: translateX(100%);
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    border-left: none;
   }
 }
 
 .ai-sidebar-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(168, 85, 247, 0.2);
   margin-bottom: 20px;
 
-  .ai-avatar-badge {
-    width: 38px;
-    height: 38px;
-    background: linear-gradient(135deg, var(--accent-violet), var(--accent-rose));
-    border-radius: 50%;
+  .ai-profile-info {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 18px;
+    gap: 12px;
+
+    .ai-avatar-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--accent-violet), var(--accent-rose));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .ai-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
   }
 
-  .ai-name {
+  .close-sidebar-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 18px;
-    font-weight: 600;
-    color: var(--text-primary);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
   }
 }
 
@@ -341,6 +401,7 @@ body {
   line-height: 1.4;
   color: var(--text-primary);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-out;
 
   &.user {
     background: #9333ea;

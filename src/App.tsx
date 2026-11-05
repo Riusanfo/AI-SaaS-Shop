@@ -13,6 +13,7 @@ interface Message {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'create' | 'benefits' | 'guide'>('home')
+  const [isAiOpen, setIsAiOpen] = useState(true)
   const [messages, setMessages] = useState<Message[]>([
     { id: '1', sender: 'ai', text: 'Hi! Im Verity. Your friend is an assistant! Ask anything, I know everything!', timestamp: '12:00' }
   ])
@@ -48,7 +49,12 @@ export default function App() {
   return (
     <div className="layout-root">
       <div className="workspace-column">
-        <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Header
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          onToggleAi={() => setIsAiOpen(prev => !prev)}
+          isAiOpen={isAiOpen}
+        />
         <main className="main-viewport">
           <Workspace activeTab={activeTab} setActiveTab={setActiveTab} />
         </main>
@@ -58,6 +64,8 @@ export default function App() {
         messages={messages}
         onSendMessage={handleSendMessage}
         isThinking={isThinking}
+        isOpen={isAiOpen}
+        onClose={() => setIsAiOpen(false)}
       />
     </div>
   )
