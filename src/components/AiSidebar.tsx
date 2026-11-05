@@ -11,11 +11,9 @@ interface AiSidebarProps {
   messages: Message[]
   onSendMessage: (text: string) => void
   isThinking: boolean
-  isOpen: boolean
-  onClose: () => void
 }
 
-export function AiSidebar({ messages, onSendMessage, isThinking, isOpen, onClose }: AiSidebarProps) {
+export function AiSidebar({ messages, onSendMessage, isThinking }: AiSidebarProps) {
   const [inputMessage, setInputMessage] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,15 +24,13 @@ export function AiSidebar({ messages, onSendMessage, isThinking, isOpen, onClose
   }
 
   return (
-    <aside className={`ai-sidebar ${isOpen ? 'open' : 'closed'}`}>
+    <aside className="ai-sidebar">
       <div className="ai-sidebar-header">
         <div className="ai-profile-info">
           <div className="ai-avatar-badge">✨</div>
           <span className="ai-name">AI Pro 1488 (Verity)</span>
         </div>
-        <button className="close-sidebar-btn" onClick={onClose} aria-label="Закрыть сайдбар">
-          ✕
-        </button>
+        <div className="ai-status-indicator" title="ИИ активен"></div>
       </div>
 
       <div className="chat-messages">
