@@ -51,7 +51,7 @@ export default function App() {
 
   return (
     <div className="layoutRoot">
-      <div className="workspaceColumn">
+      <div className={`workspaceColumn ${isAiOpen ? 'withSidebar' : ''}`}>
         <Header activeTab={activeTab} setActiveTab={setActiveTab} />
         <main className="mainViewport">
           {activeTab === 'home' && (

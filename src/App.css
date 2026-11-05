@@ -51,6 +51,17 @@ body {
   flex-direction: column;
   background: transparent;
   border-right: 1px solid var(--border-subtle);
+  transition: margin-right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.workspaceColumn.withSidebar {
+  margin-right: 440px;
+}
+
+@media (max-width: 1024px) {
+  .workspaceColumn.withSidebar {
+    margin-right: 0;
+  }
 }
 
 .mainViewport {
