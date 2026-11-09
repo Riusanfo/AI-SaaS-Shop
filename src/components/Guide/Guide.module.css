@@ -1,0 +1,53 @@
+.guidePane {
+  width: 100%;
+}
+
+.paneHeaderGroup {
+  margin-bottom: 36px;
+}
+
+.paneHeaderGroup h2 {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 40%, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.paneSubtitle {
+  font-size: 18px;
+  color: #94a3b8;
+}
+
+.guideList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guideStep {
+  font-size: 16px;
+  color: #f8fafc;
+  background: #0e0e12;
+  padding: 24px 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.guideStep strong {
+  color: #a855f7;
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+.guideStep code {
+  background: #09090b;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #e9d5ff;
+  font-family: monospace;
+  font-size: 14px;
+}
