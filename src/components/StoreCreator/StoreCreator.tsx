@@ -79,8 +79,12 @@ export function StoreCreator() {
       ) : (
         <div className={styles.successPreview}>
           <div className={styles.successBanner}>
-            <div className={styles.successIcon}>✨</div>
-            <h3>Магазин «{storeName}» готов!</h3>
+            <div className={styles.successIconWrapper}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            </div>
+            <h3>Магазин «{storeName}» готов</h3>
             <p>Мы создали структуру в стиле <strong>{selectedTemplate}</strong>, сгенерировали описания товаров и подключили корзину.</p>
           </div>
           <div className={styles.successActions}>

@@ -1,12 +1,6 @@
 import { useState } from 'react';
+import type { Message } from '../../types/chat';
 import styles from './AiSidebar.module.css';
-
-interface Message {
-  id: string;
-  sender: 'ai' | 'user';
-  text: string;
-  timestamp: string;
-}
 
 interface AiSidebarProps {
   messages: Message[];
@@ -29,24 +23,29 @@ export function AiSidebar({ messages, onSendMessage, isThinking, isOpen, onToggl
   return (
     <>
       {!isOpen && (
-        <button className={styles.aiFloatingTrigger} onClick={onToggle} aria-label="Открыть чат с ИИ Verity">
-          <span className={styles.aiTriggerIcon}>✨</span>
-          <span className={styles.aiTriggerText}>ИИ Verity</span>
-          <span className={styles.aiTriggerPulse}></span>
+        <button className={styles.aiFloatingTrigger} onClick={onToggle} aria-label="Открыть чат с ассистентом Verity">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+          </svg>
+          <span className={styles.aiTriggerText}>Ассистент Verity</span>
         </button>
       )}
 
       <aside className={`${styles.aiSidebarDrawer} ${isOpen ? styles.open : styles.closed}`}>
         <div className={styles.aiSidebarHeader}>
           <div className={styles.aiProfileInfo}>
-            <div className={styles.aiAvatarBadge}>✨</div>
+            <div className={styles.aiAvatarBadge}>
+              <span className={styles.avatarMonogram}>V</span>
+            </div>
             <div>
-              <span className={styles.aiName}>Verity AI Assistant</span>
-              <span className={styles.aiSubstatus}>Online & Ready</span>
+              <span className={styles.aiName}>Verity Assistant</span>
+              <span className={styles.aiSubstatus}>Онлайн</span>
             </div>
           </div>
-          <button className={styles.closeSidebarBtn} onClick={onToggle} aria-label="Закрыть панель ИИ">
-            ✕
+          <button className={styles.closeSidebarBtn} onClick={onToggle} aria-label="Закрыть панель">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
           </button>
         </div>
 
@@ -59,7 +58,7 @@ export function AiSidebar({ messages, onSendMessage, isThinking, isOpen, onToggl
           ))}
           {isThinking && (
             <div className={`${styles.chatBubble} ${styles.ai} ${styles.thinking}`}>
-              <p>Verity thinking... 6s</p>
+              <p>Verity думает...</p>
             </div>
           )}
         </div>
@@ -67,13 +66,13 @@ export function AiSidebar({ messages, onSendMessage, isThinking, isOpen, onToggl
         <form className={styles.chatInputForm} onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Спросите ИИ о чем угодно..."
+            placeholder="Спросите о настройке магазина..."
             value={inputMessage}
             onChange={e => setInputMessage(e.target.value)}
           />
           <button type="submit" aria-label="Отправить">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
         </form>
