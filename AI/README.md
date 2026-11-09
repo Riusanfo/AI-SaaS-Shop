@@ -33,7 +33,10 @@ AI/
 │   ├── _TEMPLATE.md           # Шаблон оформления карточки задачи
 │   ├── team-tasks.md          # Персональные технические задания для Кости и Дживана
 │   ├── task-01-auth-integration.md # Карточка задачи клиент-серверной авторизации
-│   └── task-02-store-persistence.md # Карточка задачи моделей Store/Product и API
+│   ├── task-02-store-persistence.md # Карточка задачи моделей Store/Product и API
+│   ├── task-03-public-storefront.md # Карточка задачи публичной витрины (/:slug)
+│   ├── task-04-ai-store-generator.md # Карточка задачи ИИ-генератора магазина за 60 секунд
+│   └── task-05-cart-and-checkout.md # Карточка задачи корзины и оформления заказа
 └── workflows/
     ├── task.md                # 6 шагов жизненного цикла задачи (от плана до PR)
     └── review.md              # Чек-лист проверки кода (PASS / FAIL)
