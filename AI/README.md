@@ -1,17 +1,77 @@
-# AI & Harness Documentation
+# Инженерный каркас и документация проекта (AI Harness)
 
-Структура документации и регламентов разработки проекта shop_saas_ai.
+Централизованная система правил, контекста, регламентов разработки и инструкций для участников команды и ИИ-агентов проекта shop_saas_ai.
 
-## Содержание
-- [Концепция и анализ конкурентов (`AI/docs/concept.md`)](AI/docs/concept.md)
-- [Руководство React & TypeScript (`AI/docs/react-ts-guidelines.md`)](AI/docs/react-ts-guidelines.md)
-- [Правила проекта (`AI/rules/`)](AI/rules/project.md)
-  - [Проект и стек](AI/rules/project.md#проект-и-стек)
-  - [Правила Git и коммитов](AI/rules/git.md)
-  - [Код и данные](AI/rules/code.md)
-  - [Работа с макетом](AI/rules/design.md)
-- [Воркфлоу (`AI/workflows/`)](AI/workflows/task.md)
-  - [Жизненный цикл задачи](AI/workflows/task.md)
-  - [Чек-лист ревьюера](AI/workflows/review.md)
-- [Задачи (`AI/tasks/`)](AI/tasks/_TEMPLATE.md)
-- [Дизайн (`AI/design/`)](AI/design/tokens.md)
+---
+
+## 1. Ключевые документы (Single Source of Truth)
+
+- [AI/AGENTS.md](AGENTS.md) — Главная системная инструкция для любых ИИ-агентов (Claude Code, Cursor, Windsurf, Copilot): персона инженера-наставника, жесткие границы изоляции задач, архитектурные запреты и рекомендованные скиллы.
+- [AI/context.md](context.md) — Единый актуальный срез состояния проекта: статус веток Git, история слияний в dev, статус базы данных Neon, реализованные фичи и следующие шаги.
+
+---
+
+## 2. Структура директории AI/
+
+```text
+AI/
+├── AGENTS.md                  # Системное руководство и ограничения для всех ИИ-агентов
+├── README.md                  # Навигация по инженерному каркасу (этот файл)
+├── context.md                 # Единый контекст проекта и сессий (игнорируется в Git)
+├── design/
+│   ├── tokens.md              # Дизайн-токены палитры Warm Editorial (Oat & Linen / Charred Oak)
+│   └── screens/               # Папка для экспорта эталонных макетов Figma (.png)
+├── docs/
+│   ├── concept.md             # Концепция SaaS-платформы и продуктовый анализ
+│   └── react-ts-guidelines.md # Руководство по чистому коду React 19 и TypeScript
+├── rules/
+│   ├── project.md             # Утвержденный стек, фактическое состояние и критерии приемки
+│   ├── git.md                 # Правила ветвления feat/..., коммитов и запрет push в main/dev
+│   ├── code.md                # Стандарты чистого кода, Zod-валидации и изоляции storeId
+│   └── design.md              # Правила реализации верстки, типографики и доступности
+├── tasks/
+│   ├── _TEMPLATE.md           # Шаблон оформления карточки задачи
+│   ├── team-tasks.md          # Персональные технические задания для Кости и Дживана
+│   ├── task-01-auth-integration.md # Карточка задачи клиент-серверной авторизации
+│   └── task-02-store-persistence.md # Карточка задачи моделей Store/Product и API
+└── workflows/
+    ├── task.md                # 6 шагов жизненного цикла задачи (от плана до PR)
+    └── review.md              # Чек-лист проверки кода (PASS / FAIL)
+```
+
+---
+
+## 3. Матрица изоляции задач команды
+
+Каждый разработчик работает строго в границах своей ветки и назначенных каталогов:
+
+| Разработчик | Ветка | Зона ответственности | Запрещено изменять |
+|---|---|---|---|
+| Тимлид (Riusanfo) | `feat/server-...`, `feat/frontend-...`, `feat/store-...` | `server/`, `src/`, `AI/tasks/`, `AI/` | — |
+| Костя | `feat/evals-ai-dataset` | `evals/`, `docs/user-guide/` | `src/`, `server/`, `prisma/` |
+| Дживан | `feat/design-acceptance-docs` | `AI/design/screens/`, `docs/acceptance/` | `src/`, `server/`, `prisma/` |
+
+---
+
+## 4. Обязательный регламент валидации
+
+Перед любым коммитом или сдачей задачи запускается скрипт проверки:
+
+```bash
+# В терминале Git Bash
+bash scripts/validate.sh
+```
+
+Либо пошагово:
+1. `npm run lint` — линтинг всего проекта (0 ошибок).
+2. `npm run build` — сборка клиентского приложения Vite.
+3. `npm run build --prefix server` — компиляция TypeScript сервера Express (код выхода: 0).
+
+---
+
+## 5. Правила Git
+
+1. Все изменения создаются строго в ветках `feat/...`.
+2. Прямые push в ветки `main` и `dev` категорически запрещены.
+3. Слияние Pull Request на GitHub выполняется строго методом **Create a merge commit** (без Squash).
+4. Файлы `.env`, реальные секреты и `context.md` никогда не попадают в историю коммитов.
