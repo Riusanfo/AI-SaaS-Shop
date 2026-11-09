@@ -1,22 +1,22 @@
 import { useState } from 'react';
 import { Header } from './components/Header/Header';
 import { Hero } from './components/Hero/Hero';
-import { StoreCreator } from './components/StoreCreator/StoreCreator';
+import { BuilderPage } from './features/builder/BuilderPage';
 import { Benefits } from './components/Benefits/Benefits';
 import { Guide } from './components/Guide/Guide';
 import { AiSidebar } from './components/AiSidebar/AiSidebar';
-import './App.css';
+import { AuthProvider } from './features/auth/AuthContext';
+import { useAuth } from './features/auth/useAuth';
+import { AuthModal } from './features/auth/AuthModal';
+import { AuthPrompt } from './features/auth/AuthPrompt';
+import type { Message } from './types/chat';
+import styles from './App.module.css';
 
-interface Message {
-  id: string;
-  sender: 'ai' | 'user';
-  text: string;
-  timestamp: string;
-}
-
-export default function App() {
+function AppContent() {
+  const { user, isLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<'home' | 'create' | 'benefits' | 'guide'>('home');
-  const [isAiOpen, setIsAiOpen] = useState(true);
+  const [isAiOpen, setIsAiOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { id: '1', sender: 'ai', text: 'Hi! Im Verity. Your friend is an assistant! Ask anything, I know everything!', timestamp: '12:00' }
   ]);
@@ -50,17 +50,41 @@ export default function App() {
   };
 
   return (
-    <div className="layoutRoot">
-      <div className={`workspaceColumn ${isAiOpen ? 'withSidebar' : ''}`}>
-        <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-        <main className="mainViewport">
+    <div className={styles.layoutRoot}>
+      <div className={`${styles.workspaceColumn} ${isAiOpen ? styles.withSidebar : ''}`}>
+        <Header
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          onOpenAuth={() => setIsAuthOpen(true)}
+        />
+        <main className={styles.mainViewport}>
           {activeTab === 'home' && (
             <Hero
               onStart={() => setActiveTab('create')}
               onBenefits={() => setActiveTab('benefits')}
             />
           )}
-          {activeTab === 'create' && <StoreCreator />}
+          {activeTab === 'create' && (
+            isLoading ? (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '320px', color: 'var(--text-secondary)' }}>
+                Проверка доступа…
+              </div>
+            ) : !user ? (
+              <AuthPrompt
+                type="guest"
+                onOpenAuth={() => setIsAuthOpen(true)}
+                onGoHome={() => setActiveTab('home')}
+              />
+            ) : user.role === 'BUYER' ? (
+              <AuthPrompt
+                type="buyer"
+                onOpenAuth={() => setIsAuthOpen(true)}
+                onGoHome={() => setActiveTab('home')}
+              />
+            ) : (
+              <BuilderPage />
+            )
+          )}
           {activeTab === 'benefits' && <Benefits />}
           {activeTab === 'guide' && <Guide />}
         </main>
@@ -73,6 +97,20 @@ export default function App() {
         isOpen={isAiOpen}
         onToggle={() => setIsAiOpen(prev => !prev)}
       />
+
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+      />
     </div>
   );
 }
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+}
+
