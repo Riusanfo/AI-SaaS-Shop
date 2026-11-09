@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Environment variables (секреты и локальные переменные)
+.env
+.env.*
+!.env.example
+
+# Local session context
+context.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
