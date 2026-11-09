@@ -79,3 +79,14 @@ export interface StoreConfig {
   blocks: Block[];
   products: Product[];
 }
+
+export interface ServerStore {
+  id: string;
+  name: string;
+  slug: string;
+  accentColor: string;
+  templateId: TemplateId;
+  blocks: Block[];
+  isPublished: boolean;
+  products: Product[];
+}

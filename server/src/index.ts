@@ -2,6 +2,7 @@ import express, { type Request, type Response, type NextFunction } from 'express
 import { config } from './config.js';
 import { prisma } from './db.js';
 import { authRouter } from './routes/auth.js';
+import { storeRouter } from './routes/store.js';
 
 export const app = express();
 
@@ -23,6 +24,9 @@ app.get('/api/health', async (_req: Request, res: Response) => {
 
 // Маршруты авторизации и аутентификации
 app.use('/api', authRouter);
+
+// Маршруты витрин и управления каталогом магазина
+app.use('/api', storeRouter);
 
 interface HttpError extends Error {
   status?: number;
