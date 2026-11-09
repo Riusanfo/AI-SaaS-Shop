@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { StoreConfig, TemplateId, Block } from '../../types';
+import type { StoreConfig, TemplateId, Block, Product } from '../../types';
 import { ACCENT_PRESETS } from '../../templates';
 import {
   toggleBlock,
@@ -17,6 +17,13 @@ interface StoreEditorProps {
   onChangeConfig: (newConfig: StoreConfig) => void;
   onSelectTemplate: (templateId: TemplateId) => void;
   onResetToTemplate: () => void;
+  onSave?: () => Promise<void>;
+  isSaving?: boolean;
+  saveStatus?: 'idle' | 'saving' | 'saved' | 'error';
+  saveError?: string;
+  storeSlug?: string;
+  onAddProduct?: (product: Omit<Product, 'id'>) => Promise<void> | void;
+  onRemoveProduct?: (productId: string) => Promise<void> | void;
 }
 
 export function StoreEditor({
@@ -24,6 +31,13 @@ export function StoreEditor({
   onChangeConfig,
   onSelectTemplate,
   onResetToTemplate,
+  onSave,
+  isSaving = false,
+  saveStatus = 'idle',
+  saveError,
+  storeSlug,
+  onAddProduct,
+  onRemoveProduct,
 }: StoreEditorProps) {
   const [selectedBlockId, setSelectedBlockId] = useState<string>(
     config.blocks[0]?.id || ''
@@ -54,6 +68,48 @@ export function StoreEditor({
 
   return (
     <aside className={styles.editorContainer}>
+      {/* 0. Панель облачного сохранения в Neon */}
+      <div className={styles.saveBar}>
+        <div className={styles.saveStatusGroup}>
+          <div className={styles.saveStatusIcon}>
+            {saveStatus === 'saved' ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            ) : saveStatus === 'saving' ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+              </svg>
+            )}
+          </div>
+          <span className={styles.saveStatusText}>
+            {saveStatus === 'saving'
+              ? 'Сохранение в Neon...'
+              : saveStatus === 'saved'
+                ? 'Сохранено в облаке'
+                : saveStatus === 'error'
+                  ? saveError || 'Ошибка сохранения'
+                  : storeSlug
+                    ? `Адрес: /${storeSlug}`
+                    : 'Черновик витрины'}
+          </span>
+        </div>
+
+        {onSave && (
+          <button
+            type="button"
+            className={styles.saveButton}
+            onClick={() => void onSave()}
+            disabled={isSaving}
+          >
+            {isSaving ? 'Сохранение…' : 'Сохранить витрину'}
+          </button>
+        )}
+      </div>
       {/* 1. Выбор шаблона */}
       <div className={styles.section}>
         <div className={styles.sectionTitle}>
@@ -393,8 +449,8 @@ export function StoreEditor({
       {/* 5. Управление товарами */}
       <ProductEditor
         products={config.products}
-        onAddProduct={prod => onChangeConfig(addProduct(config, prod))}
-        onRemoveProduct={prodId => onChangeConfig(removeProduct(config, prodId))}
+        onAddProduct={onAddProduct || (prod => onChangeConfig(addProduct(config, prod)))}
+        onRemoveProduct={onRemoveProduct || (prodId => onChangeConfig(removeProduct(config, prodId)))}
       />
 
       {/* 6. Сброс к шаблону */}
