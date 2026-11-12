@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  PLATFORM_ADMIN
+  STORE_OWNER
+  STORE_MANAGER
+  BUYER
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(BUYER)
+  createdAt    DateTime  @default(now())
+  sessions     Session[]
+  stores       Store[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Store {
+  id          String    @id @default(uuid())
+  ownerId     String
+  name        String
+  slug        String    @unique
+  accentColor String    @default("#C87A24")
+  templateId  String    @default("minimal")
+  blocks      Json      @default("[]")
+  isPublished Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  owner       User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  products    Product[]
+
+  @@index([ownerId])
+  @@map("stores")
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  storeId     String
+  name        String
+  description String   @default("")
+  price       Int      @default(0)
+  imageUrl    String?
+  category    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@index([storeId])
+  @@map("products")
+}

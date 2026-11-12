@@ -1,0 +1,22 @@
+# Основная база данных проекта развёрнута в облаке Neon Serverless PostgreSQL.
+# Данный docker-compose файл предназначен ИСКЛЮЧИТЕЛЬНО для локального автономного
+# запуска копии PostgreSQL при разработке без доступа к интернету или для локальных тестов.
+# Указанные ниже учётные данные являются тестовыми заглушками для локального контейнера
+# и не содержат реальных паролей или доступа к облачной инфраструктуре.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: shop_saas_postgres_dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: shop_dev_user
+      POSTGRES_PASSWORD: shop_dev_password
+      POSTGRES_DB: shop_saas_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_dev_data:
+    driver: local

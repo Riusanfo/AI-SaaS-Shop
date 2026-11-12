@@ -1,0 +1,307 @@
+.heroPane {
+  text-align: center;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.heroHeadline {
+  font-size: clamp(34px, 4.5vw, 54px);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.heroAccent {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.heroSubline {
+  font-size: 17px;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  line-height: 1.6;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroActions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border: 1px solid var(--accent);
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(200, 122, 36, 0.25);
+}
+
+.btnPrimary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(200, 122, 36, 0.35);
+}
+
+.btnArrow {
+  font-size: 16px;
+}
+
+.btnSecondary {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 14px 26px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btnSecondary:hover {
+  background: var(--bg-subtle);
+  border-color: var(--text-muted);
+}
+
+.heroPreviewCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.previewHeader {
+  background: var(--bg-subtle);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.windowDots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dot.red { background: #ef4444; }
+.dot.yellow { background: #f59e0b; }
+.dot.green { background: #22c55e; }
+
+.previewTitle {
+  margin-left: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.previewLiveBadge {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--accent-status);
+  font-weight: 600;
+  padding: 2px 8px;
+  background: var(--badge-bg);
+  border-radius: 6px;
+}
+
+.previewBody {
+  padding: 24px;
+  background: var(--bg-surface);
+}
+
+.mockStoreBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mockBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mockLogo {
+  font-size: 16px;
+  color: var(--accent);
+}
+
+.mockName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.mockCartBadge {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.mockGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .mockGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mockProductCard {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.mockProductCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.productImagePlaceholder {
+  position: relative;
+  height: 96px;
+  background: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.productIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.mockProductCard:hover .productIconWrapper {
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+.productTag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-contrast);
+  padding: 3px 6px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.productTag.hit { background: var(--accent); }
+.productTag.new { background: var(--accent-status); }
+.productTag.inStock { background: var(--text-muted); }
+
+.productDetails {
+  padding: 12px;
+}
+
+.productCategory {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.productTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.productFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.productPrice {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.productBuyBtn {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.productBuyBtn:hover {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}

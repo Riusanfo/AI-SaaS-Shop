@@ -1,0 +1,57 @@
+.guidePane {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.paneHeaderGroup {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.paneHeaderGroup h2 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.paneSubtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.guideList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guideStep {
+  font-size: 15px;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  line-height: 1.5;
+}
+
+.guideStep strong {
+  color: var(--accent);
+  margin-right: 8px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.guideStep code {
+  background: var(--bg-subtle);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: monospace;
+  font-size: 13px;
+}
